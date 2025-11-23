@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Archive Test Report') {
         	steps {
-        	    Artifacts artifacts: 'PyTest DQ Framework/html_report/**',
+        	    Artifacts artifacts: 'PyTest DQ Framework/html_report/**', allowEmptyArchive: true
     			publishHTML(target: [
         			allowMissing: false, // Fail the pipeline if the report is missing
         			keepAll: true, // Keep all reports from previous runs
