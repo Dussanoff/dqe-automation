@@ -10,10 +10,8 @@ def pytest_addoption(parser):
     parser.addoption("--db_host", action="store", default="localhost", help="Database host")
     parser.addoption("--db_port", action="store", default="5434", help="Database port")
     parser.addoption("--db_name", action="store", default="mydatabase", help="Database name")
-    parser.addoption("--db_user", action="store", #default=os.environ.get("POSTGRES_SECRET_USR")
-                     help="Database user")
-    parser.addoption("--db_password", action="store", #default=os.environ.get("POSTGRES_SECRET_PSW")
-                     help="Database password")
+    parser.addoption("--db_user", action="store", default=os.environ.get("POSTGRES_SECRET_USR"), help="Database user")
+    parser.addoption("--db_password", action="store", default=os.environ.get("POSTGRES_SECRET_PSW"), help="Database password")
 
 
 def pytest_configure(config):
