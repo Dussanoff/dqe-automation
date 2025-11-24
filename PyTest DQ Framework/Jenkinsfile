@@ -21,6 +21,7 @@ pipeline {
                     sh '''
                     python3 -m venv venv
                     . venv/bin/activate
+                    cd "PyTest DQ Framework"
                     pytest tests -m "parquet_data" --db_user="$POSTGRES_SECRET_USR" --db_password="$POSTGRES_SECRET_PSW" --html=html_report/report.html
                     '''
                 }
