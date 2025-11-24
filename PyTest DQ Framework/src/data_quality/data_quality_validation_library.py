@@ -13,11 +13,10 @@ class DataQualityLibrary:
     @staticmethod
     def check_duplicates(df, column_names=None):
         if column_names:
-            duplicates = df.duplicates(column_names)
+            duplicates = df.duplicated(subset=column_names)
         else:
-            duplicates = df.duplicates()
+            duplicates = df.duplicated()
         assert not duplicates.any(), f"Found duplicates:\n{df[duplicates]}"
-
 
     @staticmethod
     def check_count(df1, df2):
