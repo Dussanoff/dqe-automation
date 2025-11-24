@@ -7,6 +7,17 @@ pipeline {
 //         POSTGRES_SECRET = "${POSTGRES_SECRET}"
 //    }
     stages{
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    sh '''
+                        python3 -m venv venv
+                        . venv/bin/activate
+                        pip install -r data_dev/requirements.txt
+                    '''
+                }
+            }
+        }
         stage('Run PyTest') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'POSTGRES_SECRET',
