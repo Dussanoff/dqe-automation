@@ -13,7 +13,6 @@ pipeline {
                     sh '''
                         python3 -m venv venv
                         source venv/bin/activate
-                        . venv/bin/activate
                         pip install -r data_dev/requirements.txt
                     '''
                 }
@@ -25,6 +24,7 @@ pipeline {
                                                   usernameVariable: 'POSTGRES_SECRET_USR',
                                                   passwordVariable: 'POSTGRES_SECRET_PSW')]) {
                     sh '''
+                    . venv/bin/activate
                     pytest tests -m "parquet_data" \
                        --db_user="$POSTGRES_SECRET_USR" \
                        --db_password="$POSTGRES_SECRET_PSW" \
