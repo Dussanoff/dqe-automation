@@ -24,7 +24,7 @@ class DataQualityLibrary:
         assert len(df1) == len(df2), f"Row count mismatch: df1={len(df1)}, df2={len(df2)}"
 
     @staticmethod
-    def check_data_full_data_set(df1, df2):
+    def check_data_completeness(df1, df2):
         pd.testing.assert_frame_equal(df1.reset_index(drop=True), df2.reset_index(drop=True))
 
     @staticmethod
