@@ -10,14 +10,39 @@ import pytest
 @pytest.fixture(scope='module')
 def source_data(db_connection):
     source_query = """
-select 
+//select 
+//    f.facility_name,
+//    cast(v.visit_timestamp as date) as date, 
+//    min(v.duration_minutes)over(
+//    partition by v.facility_id, cast(v.visit_timestamp as date)
+//    order by v.facility_id, cast(v.visit_timestamp as date))
+//from visits v
+//join facilities f on f.id = v.facility_id
+SELECT
     f.facility_name,
-    cast(v.visit_timestamp as date) as date, 
-    min(v.duration_minutes)over(
-    partition by v.facility_id, cast(v.visit_timestamp as date)
-    order by v.facility_id, cast(v.visit_timestamp as date))
-from visits v
-join facilities f on f.id = v.facility_id
+    v.visit_timestamp::date AS visit_date,
+    MIN(v.duration_minutes) AS min_time_spent
+FROM
+    visits v
+JOIN facilities f 
+    ON f.id = v.facility_id
+GROUP BY
+    f.facility_name,
+    visit_date
+UNION ALL  // misstake
+SELECT
+    f.facility_name,
+    v.visit_timestamp::date AS visit_date,
+    MIN(v.duration_minutes) AS min_time_spent
+FROM
+    visits v
+JOIN facilities f 
+    ON f.id = v.facility_id
+WHERE
+    f.facility_type = 'Clinic' 
+GROUP BY
+    f.facility_name,
+    visit_date;
 """
     source_data = db_connection.get_data_sql(source_query)
     return source_data
