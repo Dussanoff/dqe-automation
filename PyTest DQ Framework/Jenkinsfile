@@ -4,7 +4,7 @@ pipeline {
 //         POSTGRES_SECRET = credentials('jenkins-postgres-credentials')
 //         POSTGRES_SECRET_USR = "${POSTGRES_SECRET_USR}"
 //         POSTGRES_SECRET_PSW = "${POSTGRES_SECRET_PSW}"
-        POSTGRES_SECRET = credentials(POSTGRES_SECRET)
+//         POSTGRES_SECRET = "${POSTGRES_SECRET}"
     }
     stages{
         stage('Run PyTest') {
