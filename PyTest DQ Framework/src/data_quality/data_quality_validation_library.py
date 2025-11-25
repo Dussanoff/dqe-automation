@@ -11,28 +11,30 @@ class DataQualityLibrary:
     """
 
     @staticmethod
-    def check_duplicates(df, column_names=None):
+    def check_duplicates(target_data, column_names=None):
         if column_names:
-            duplicates = df.duplicated(subset=column_names)
+            duplicates = target_data.duplicated(subset=column_names)
         else:
-            duplicates = df.duplicated()
-        assert not duplicates.any(), f"Found duplicates:\n{df[duplicates]}"
+            duplicates = target_data.duplicated()
+        assert not duplicates.any(), f"Found duplicates:\n{target_data[duplicates]}"
 
     @staticmethod
-    def check_count(df1, df2):
-        assert len(df1) == len(df2), f"Row count mismatch: df1={len(df1)}, df2={len(df2)}"
+    def check_count(source_data, target_data):
+        assert len(source_data) == len(target_data), \
+            f"Row count mismatch: source_data={len(source_data)}, target_data={len(target_data)}"
 
     @staticmethod
-    def check_data_completeness(df1, df2):
-        pd.testing.assert_frame_equal(df1.reset_index(drop=True), df2.reset_index(drop=True))
+    def check_data_completeness(source_data, target_data):
+        pd.testing.assert_frame_equal(source_data.reset_index(drop=True),
+                                      target_data.reset_index(drop=True))
 
     @staticmethod
-    def check_dataset_is_not_empty(df):
-        assert not df.empty, "Dataset is empty"
+    def check_dataset_is_not_empty(target_data):
+        assert not target_data.empty, "Dataset is empty"
 
     @staticmethod
-    def check_not_null_values(df, column_names=None):
+    def check_not_null_values(target_data, column_names=None):
         if column_names is None:
-            column_names = df.columns
+            column_names = target_data.columns
         for col in column_names:
-            assert df[col].notnull().all(), f"NULL values found in column '{col}'"
+            assert target_data[col].notnull().all(), f"NULL values found in column '{col}'"
