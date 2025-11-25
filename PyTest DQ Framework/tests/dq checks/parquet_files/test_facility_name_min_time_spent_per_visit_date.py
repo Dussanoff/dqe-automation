@@ -19,7 +19,7 @@ JOIN facilities f ON f.id = v.facility_id
 GROUP BY
     f.facility_name,
     visit_date
---ORDER BY f.facility_name, visit_date
+ORDER BY f.facility_name, visit_date
 ;
 """
     source_data = db_connection.get_data_sql(source_query)
