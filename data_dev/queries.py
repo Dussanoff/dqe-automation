@@ -206,5 +206,6 @@ WHERE
     f.facility_type = 'Clinic' 
 GROUP BY
     f.facility_name,
-    visit_date;
+    visit_date
+ORDER BY f.facility_name, visit_date;
 """

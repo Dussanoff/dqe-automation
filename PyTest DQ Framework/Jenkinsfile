@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+    stages{
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    sh '''
+                        python3 -m venv venv
+                        . venv/bin/activate
+                        cd "PyTest DQ Framework"
+                        pip install -r requirements.txt
+                    '''
+                }
+            }
+        }
+        stage('Run PyTest') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'POSTGRES_SECRET',
+                                                  usernameVariable: 'POSTGRES_SECRET_USR',
+                                                  passwordVariable: 'POSTGRES_SECRET_PSW')]) {
+                    sh '''
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    cd "PyTest DQ Framework"
+                    pytest tests -m "parquet_data" \
+                        --db_host="postgres" \
+                        --db_port="5432" \
+                        --db_name="mydatabase" \
+                        --db_user=$POSTGRES_SECRET_USR \
+                        --db_password=$POSTGRES_SECRET_PSW \
+                        --html=html_report/report.html
+
+                    '''
+                }
+            }
+        }
+        stage('Archive Test Report') {
+        	steps {
+        	    archiveArtifacts artifacts: 'PyTest DQ Framework/html_report/**', allowEmptyArchive: true
+    			publishHTML(target: [
+        			allowMissing: false, // Fail the pipeline if the report is missing
+        			keepAll: true, // Keep all reports from previous runs
+        			reportDir: 'PyTest DQ Framework/html_report', // Correct directory path
+        			reportFiles: 'index.html', // Entry point file reportName: 'HTML Test Report' // Display name in Jenkins
+                    reportName: 'PyTest DQ Framework'
+        		])
+        	}
+        }
+    }
+}
