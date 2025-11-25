@@ -18,7 +18,7 @@ def file():
 def schema(file):
     actual = list(file.columns)
     expected = ["id", "name", "age", "email"]
-    return actual, expected
+    assert actual == expected, "Schema mismatch"
 
 
 @pytest.fixture(scope = "session")

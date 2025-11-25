@@ -41,8 +41,7 @@ def test_duplicates(list_of_dict):#5                                        read
 
 @pytest.mark.validate_csv
 def test_validate_schema(list_of_dict, schema):#2                           ready
-    actual, expected = schema
-    assert actual == expected, f"Schema mismatch"
+    schema()
 
 
 @pytest.mark.validate_csv
