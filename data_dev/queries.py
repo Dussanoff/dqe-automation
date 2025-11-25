@@ -193,7 +193,7 @@ JOIN facilities f
 GROUP BY
     f.facility_name,
     visit_date
-UNION ALL  -- misstake
+/*UNION ALL  -- misstake
 SELECT
     f.facility_name,
     v.visit_timestamp::date AS visit_date,
@@ -206,5 +206,5 @@ WHERE
     f.facility_type = 'Clinic' 
 GROUP BY
     f.facility_name,
-    visit_date;
+    visit_date*/;
 """
