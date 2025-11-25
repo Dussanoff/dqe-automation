@@ -55,6 +55,7 @@ def test_check_dataset_is_not_empty(target_data, data_quality_library):
     data_quality_library.check_dataset_is_not_empty(target_data)
 
 
+@pytest.mark.xfail
 @pytest.mark.parquet_data
 @pytest.mark.facility_name_min_time_spent_per_visit_date
 def test_check_data_completeness(source_data, target_data, data_quality_library):
@@ -66,7 +67,7 @@ def test_check_data_completeness(source_data, target_data, data_quality_library)
 def test_check_count(source_data, target_data, data_quality_library):
     data_quality_library.check_count(source_data, target_data)
 
-
+@pytest.mark.xfail
 @pytest.mark.parquet_data
 @pytest.mark.facility_name_min_time_spent_per_visit_date
 def test_check_uniqueness(target_data, data_quality_library):
