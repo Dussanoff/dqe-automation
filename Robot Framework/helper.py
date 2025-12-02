@@ -40,7 +40,6 @@ class Helper:
 
 
 
-
 def read_table(driver, xPath, correct=True, filter_date=None):
     table = driver.find_element(By.XPATH, xPath)
     columns = table.find_elements(By.CSS_SELECTOR, "g.y-column")
@@ -74,9 +73,6 @@ def filter_df_by_date(df, date):
     df['Visit Date'] = pd.to_datetime(df['Visit Date'])
     return df[df['Visit Date'] == filter_date].reset_index(drop=True)
 
-
-
-
 if __name__ == "__main__":
     from selenium import webdriver
     from selenium.webdriver.chrome.service import Service
@@ -102,15 +98,7 @@ if __name__ == "__main__":
     df_incorrect = read_table(driver, "//*[@class='table']", False)
     df_incorrect.to_parquet("parquet/table_incorrect.parquet", index=False)
 
-    #date = "2025-11-23"
-    #df_filtered = filter_df_by_date(df_correct, date)
-    #df_filtered.to_parquet(f"results/table_date.parquet", index=False)
-
     driver.quit()
-
-
-
-
 
 
 # robot --pythonpath . --outputdir ./results test.robot

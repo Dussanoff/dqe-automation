@@ -49,3 +49,20 @@ Validate Filtered Parquet Files
         ${file_path}=   Join Path               ${PARQUET_FOLDER}   ${file}
         Run Keyword     Validate Parquet File   ${html_df}    ${file_path}    ${FILTER_DATE}
     END
+
+
+Validate one DataFrame
+    ${html_df}=     Read HTML Table With Retry  ${XPATH}
+    @{files}=       List Files In Directory     ${PARQUET_FOLDER}    pattern=*table_correct.parquet
+    FOR  ${file}  IN  @{files}
+        ${file_path}=   Join Path               ${PARQUET_FOLDER}   ${file}
+        Run Keyword     Validate Parquet File   ${html_df}    ${file_path}
+    END
+
+Validate one Filtered Parquet Files
+    ${html_df}=     Read HTML Table With Retry  ${XPATH}            ${FILTER_DATE}
+    @{files}=       List Files In Directory     ${PARQUET_FOLDER}    pattern=*table_correct.parquet
+    FOR  ${file}  IN  @{files}
+        ${file_path}=   Join Path               ${PARQUET_FOLDER}   ${file}
+        Run Keyword     Validate Parquet File   ${html_df}    ${file_path}    ${FILTER_DATE}
+    END
