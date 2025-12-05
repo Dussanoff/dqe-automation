@@ -1,0 +1,156 @@
+Started by user Aizhan Dussanova
+Obtained PyTest DQ Framework/Jenkinsfile from git https://github.com/Dussanoff/dqe-automation.git/
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/DQ Framework
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/DQ Framework/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Dussanoff/dqe-automation.git/ # timeout=10
+Fetching upstream changes from https://github.com/Dussanoff/dqe-automation.git/
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/Dussanoff/dqe-automation.git/ +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/Framework^{commit} # timeout=10
+Checking out Revision 0bfbbfcfa95c01b99aa69186396db35028f91c61 (refs/remotes/origin/Framework)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 0bfbbfcfa95c01b99aa69186396db35028f91c61 # timeout=10
+Commit message: "reportName: 'PyTest DQ Framework'"
+ > git rev-list --no-walk 0bfbbfcfa95c01b99aa69186396db35028f91c61 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Install Dependencies)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ python3 -m venv venv
++ . venv/bin/activate
++ deactivate nondestructive
++ [ -n  ]
++ [ -n  ]
++ hash -r
++ [ -n  ]
++ unset VIRTUAL_ENV
++ unset VIRTUAL_ENV_PROMPT
++ [ ! nondestructive = nondestructive ]
++ uname
++ export VIRTUAL_ENV=/var/jenkins_home/workspace/DQ Framework/venv
++ _OLD_VIRTUAL_PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++ PATH=/var/jenkins_home/workspace/DQ Framework/venv/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++ export PATH
++ VIRTUAL_ENV_PROMPT=venv
++ export VIRTUAL_ENV_PROMPT
++ [ -n  ]
++ [ -z  ]
++ _OLD_VIRTUAL_PS1=# 
++ PS1=(venv) # 
++ export PS1
++ hash -r
++ cd PyTest DQ Framework
++ pip install -r requirements.txt
+Requirement already satisfied: pytest~=8.3.3 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from -r requirements.txt (line 1)) (8.3.5)
+Requirement already satisfied: pytest-html~=4.1.1 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from -r requirements.txt (line 2)) (4.1.1)
+Requirement already satisfied: psycopg2-binary~=2.9.10 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from -r requirements.txt (line 3)) (2.9.11)
+Requirement already satisfied: pandas~=2.2.3 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from -r requirements.txt (line 4)) (2.2.3)
+Requirement already satisfied: pyarrow~=19.0.1 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from -r requirements.txt (line 5)) (19.0.1)
+Requirement already satisfied: sqlalchemy~=2.0.36 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from -r requirements.txt (line 6)) (2.0.44)
+Requirement already satisfied: python-dotenv~=1.0.1 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from -r requirements.txt (line 7)) (1.0.1)
+Requirement already satisfied: iniconfig in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from pytest~=8.3.3->-r requirements.txt (line 1)) (2.3.0)
+Requirement already satisfied: packaging in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from pytest~=8.3.3->-r requirements.txt (line 1)) (25.0)
+Requirement already satisfied: pluggy<2,>=1.5 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from pytest~=8.3.3->-r requirements.txt (line 1)) (1.6.0)
+Requirement already satisfied: jinja2>=3.0.0 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from pytest-html~=4.1.1->-r requirements.txt (line 2)) (3.1.6)
+Requirement already satisfied: pytest-metadata>=2.0.0 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from pytest-html~=4.1.1->-r requirements.txt (line 2)) (3.1.1)
+Requirement already satisfied: numpy>=1.26.0 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from pandas~=2.2.3->-r requirements.txt (line 4)) (2.3.5)
+Requirement already satisfied: python-dateutil>=2.8.2 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from pandas~=2.2.3->-r requirements.txt (line 4)) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from pandas~=2.2.3->-r requirements.txt (line 4)) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from pandas~=2.2.3->-r requirements.txt (line 4)) (2025.2)
+Requirement already satisfied: greenlet>=1 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from sqlalchemy~=2.0.36->-r requirements.txt (line 6)) (3.2.4)
+Requirement already satisfied: typing-extensions>=4.6.0 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from sqlalchemy~=2.0.36->-r requirements.txt (line 6)) (4.15.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from jinja2>=3.0.0->pytest-html~=4.1.1->-r requirements.txt (line 2)) (3.0.3)
+Requirement already satisfied: six>=1.5 in /var/jenkins_home/workspace/DQ Framework/venv/lib/python3.13/site-packages (from python-dateutil>=2.8.2->pandas~=2.2.3->-r requirements.txt (line 4)) (1.17.0)
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Run PyTest)
+[Pipeline] withCredentials
+Masking supported pattern matches of $POSTGRES_SECRET_USR or $POSTGRES_SECRET_PSW
+[Pipeline] {
+[Pipeline] sh
++ python3 -m venv venv
++ . venv/bin/activate
++ deactivate nondestructive
++ [ -n  ]
++ [ -n  ]
++ hash -r
++ [ -n  ]
++ unset VIRTUAL_ENV
++ unset VIRTUAL_ENV_PROMPT
++ [ ! nondestructive = nondestructive ]
++ uname
++ export VIRTUAL_ENV=/var/jenkins_home/workspace/DQ Framework/venv
++ _OLD_VIRTUAL_PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++ PATH=/var/jenkins_home/workspace/DQ Framework/venv/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++ export PATH
++ VIRTUAL_ENV_PROMPT=venv
++ export VIRTUAL_ENV_PROMPT
++ [ -n  ]
++ [ -z  ]
++ _OLD_VIRTUAL_PS1=# 
++ PS1=(venv) # 
++ export PS1
++ hash -r
++ cd PyTest DQ Framework
++ pytest tests -m parquet_data --db_host=postgres --db_port=5432 --db_name=mydatabase --db_user=**** --db_password=**** --html=html_report/report.html
+============================= test session starts ==============================
+platform linux -- Python 3.13.5, pytest-8.3.5, pluggy-1.6.0
+rootdir: /var/jenkins_home/workspace/DQ Framework/PyTest DQ Framework/tests
+configfile: pytest.ini
+plugins: metadata-3.1.1, Faker-37.1.1, html-4.1.1
+collected 7 items / 2 deselected / 5 selected
+
+tests/dq checks/parquet_files/test_facility_name_min_time_spent_per_visit_date.py . [ 20%]
+x.x.                                                                     [100%]
+
+=============================== warnings summary ===============================
+tests/dq checks/parquet_files/test_facility_name_min_time_spent_per_visit_date.py:52
+  /var/jenkins_home/workspace/DQ Framework/PyTest DQ Framework/tests/dq checks/parquet_files/test_facility_name_min_time_spent_per_visit_date.py:52: PytestUnknownMarkWarning: Unknown pytest.mark.smoke - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke
+
+dq checks/parquet_files/test_facility_name_min_time_spent_per_visit_date.py::test_check_data_completeness
+  /var/jenkins_home/workspace/DQ Framework/PyTest DQ Framework/src/connectors/postgres/postgres_connector.py:32: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+    data_df = pd.read_sql(sql, self.connection)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- Generated html report: file:///var/jenkins_home/workspace/DQ%20Framework/PyTest%20DQ%20Framework/html_report/report.html -
+============ 3 passed, 2 deselected, 2 xfailed, 2 warnings in 2.04s ============
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Archive Test Report)
+[Pipeline] archiveArtifacts
+Archiving artifacts
+[Pipeline] publishHTML
+[htmlpublisher] Archiving HTML reports...
+[htmlpublisher] Archiving at BUILD level /var/jenkins_home/workspace/DQ Framework/PyTest DQ Framework/html_report to PyTest_20DQ_20Framework
+[htmlpublisher] Copying recursive using current thread
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
